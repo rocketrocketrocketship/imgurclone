@@ -12,6 +12,6 @@
     "express": "^4.13.4",
     "express-busboy": "^2.5.0",
     "mongoose": "^4.4.17",
-    "s3-upload-stream": "^1.0.7",
+    "s3-upload-stream": "^1.0.7"
   }
 }
