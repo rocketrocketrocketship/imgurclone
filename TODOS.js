@@ -8,7 +8,7 @@
 // 	5.1 when user wants to upload picture, he/she should have an option to mark the photo to public or private (updating schema)
 // 	...
 // 6. think about adding thumbnails separately for pictures maybe?
-// 7. gotta clean up node_modules (delete things that are not used really)
+// 7. gotta clean up node_modules (delete things that are not used really) --- DONE ---
 // 8. displaying the public pictures on the front page with a limiter... user wants to see 20, 30 or 100 pictures at once?
 // 9. grid option for user on front page with maybe 3 different layouts.
 // 10. adding comments forms for pictures
