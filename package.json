@@ -1,6 +1,6 @@
 {
   "name": "node-sample",
-  "description": "Our sample Node to Heroku app",
+  "description": "practicing MEAN stack",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
