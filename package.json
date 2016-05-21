@@ -13,6 +13,7 @@
     "body-parser": "^1.15.1",
     "express-busboy": "^2.5.0",
     "mongoose": "^4.4.17",
-    "s3-upload-stream": "^1.0.7"
+    "s3-upload-stream": "^1.0.7",
+    "morgan": "^1.7.0"
   }
 }

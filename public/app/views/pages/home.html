@@ -1,0 +1,11 @@
+<h1>Hello, {{image.name}}</h1>
+<p>Upload an image or an album. Choose yourself. </p>
+<form ref='uploadForm' id='uploadForm' action='img/upload' method='post' encType="multipart/form-data">
+	<label>
+		<input style="display:none;" type="file" name="sampleFile" id="uploadFile" multiple/>
+		<div class="btn btn-primary">Pick pic</div>
+	</label>
+	<button type="button" class="btn btn-default" ng-click="image.upload()" id="upload-button">Upload</button>
+</form>
+<img style="width:200px;" id="test"/>
+<script src="assets/js/uploader.js"></script>
