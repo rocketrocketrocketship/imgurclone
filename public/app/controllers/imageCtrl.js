@@ -2,7 +2,7 @@ angular.module('imageCtrl', [])
 
 .controller('uploadController', function($rootScope, $window, Auth) { // here it all begins
 	var vm = this;
-	vm.name = "awesome people";
+	vm.name = "world!";
 	vm.link = '';	
 	vm.upload = function () {
 		// get all user's files and append them to FormData so we can send them to the server
@@ -72,9 +72,3 @@ angular.module('imageCtrl', [])
 		});
 });
 
-function updateProgress(evt) {
-   if (evt.lengthComputable) {
-       var progress = Math.ceil(((upload.loaded + evt.loaded) / upload.total) * 100);
-       document.querySelector('.innerprogress').style.width = progress + '%';
-   }
-}
