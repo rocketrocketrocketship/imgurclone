@@ -14,6 +14,11 @@ angular.module('app.routes', ['ngRoute'])
             controller: 'singleImageController',
             controllerAs: 'single'
         })
+        .when('/showalbum/:albumId', {
+            templateUrl: 'app/views/pages/album.html',
+            controller: 'albumController',
+            controllerAs: 'album'
+        })
         .when('/show', {
             templateUrl: 'app/views/pages/image.html',
             controller: 'singleImageController',

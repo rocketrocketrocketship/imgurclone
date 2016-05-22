@@ -1,6 +1,6 @@
 var mongoose     = require('mongoose');
 var Schema       = mongoose.Schema;
-var ObjectId = mongoose.Schema.Types.ObjectId;
+var ObjectId     = mongoose.Schema.Types.ObjectId;
 var bcrypt 		 = require('bcrypt-nodejs');
 
 // Album schema 
@@ -11,11 +11,11 @@ var AlbumSchema   = new Schema({
 	size: Number,
 	nrOfPictures: Number,
 	date: { type: Date, default: Date.now },
-	upvotes: Number,
-	downvotes: Number,
-	tags: [String],
-	comments: [ObjectId],
-	pictures: [ObjectId]
+	upvotes: { type: Number, default: 1 },
+	downvotes: { type: Number, default: 1 },
+	tags: { type: [String], default: [''] },
+	comments: { type: [ObjectId], default: [] },
+	pictures: { type: [ObjectId], default: [] }
 }, {collection: 'albums'});
 
 AlbumSchema.pre('save', function(next) {
