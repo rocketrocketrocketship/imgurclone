@@ -1,5 +1,6 @@
 <h1>Upload succesful!</h1>
 <h3>{{album.name}}</h3>
+
 <span ng-repeat="link in album.links">
-	<img style="width: 200px;" ng-src="{{link.amazonLink}}">	
+	<span class="img" style="background-image:url({{link.amazonLink}});">	
 </span>

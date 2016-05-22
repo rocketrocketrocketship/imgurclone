@@ -17,8 +17,15 @@ angular.module('imageCtrl', [])
 				formData.append('photos', file);
 			}
 		}
-
+		var total = 20000;
 		var xhr = new XMLHttpRequest();
+		xhr.upload.onprogress = function(e) {
+           if (e.lengthComputable) {
+       			var percentComplete = Math.ceil((e.loaded / e.total) * 100);
+       			document.querySelector('.progressbar').style.display = 'block';
+       			document.querySelector('.innerprogress').style.width = percentComplete + '%';
+   			}
+        }
 		xhr.open('POST', '/img/upload', true);
 		xhr.setRequestHeader('X-Requested-With','XMLHttpRequest');
 		xhr.setRequestHeader('files-length', files.length);
@@ -64,3 +71,10 @@ angular.module('imageCtrl', [])
 	    	console.log('failure');
 		});
 });
+
+function updateProgress(evt) {
+   if (evt.lengthComputable) {
+       var progress = Math.ceil(((upload.loaded + evt.loaded) / upload.total) * 100);
+       document.querySelector('.innerprogress').style.width = progress + '%';
+   }
+}
