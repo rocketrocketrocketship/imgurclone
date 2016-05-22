@@ -13,32 +13,16 @@ var s3Stream = require('s3-upload-stream')(new AWS.S3({
   	secretAccessKey: config.secret
 }));
 
-function uploadS3 (readStream, key, callback) {
-  	var upload = s3Stream.upload({
-    	'Bucket': config.bucket,
-    	'Key': key
-  	});
-  	upload.on('error', err => callback(err));
-  	upload.on('part', details => console.log('deeets', inspect(details)));
-  	upload.on('uploaded', details => callback(null, details));
 
-  	// Pipe the Readable stream to the s3-upload-stream module.
-  	readStream.pipe(upload);
-}
 module.exports = (app, express) => {
-
 	var imgRouter = express.Router();
-
 	imgRouter.post('/upload', (req, res) => {
 		var filesLength = JSON.parse(req.get('files-length')),					// get files length first and determine if we need an album or not
 			counter = 0,
-			album;
-		if (filesLength > 1) {
-			album = new Album();
-		}
+			album = (filesLength > 1) ? new Album() : undefined;
 		var busboy = new Busboy({ headers: req.headers });						// Saves user images to AMAZON S3 servers
 	    if (req.busboy) {														// TODO: maybe make this logic to its own function because right now we're uploading and saving to database in this one function.													
-	        req.busboy.on('file', (fieldname, file, filename, encoding) => {	// maybe break this stuff into smaller functions and move to another folders and files. 
+	        req.busboy.on('file', (fieldname, file, filename, encoding) => {	
 	        	uploadS3(file, filename, (err, data) => {
 			        if (!err) {
 			        	var image = new Image({
@@ -47,29 +31,18 @@ module.exports = (app, express) => {
 			        		size: null,
 			        		amazonLink: data.Location
 			        	});
-			        	image.save((err, mongoReturnDocument) => {		// save single image to database
-			        		if (err) {
-								if (err.code == 11000) {
-									return res.json({ success: false, message: 'Duplicate'});
-								}
-								else {
-									return res.json({ success: false, message: 'Saved to Amazon, but not to database', error: err});
-								}
-							} else if (!album) {								// if there was only one image, not album, then return that image's ID to front-end.
-								res.statusCode = 200;
-								res.json({ message: 'Image added!', imageId: mongoReturnDocument._id });
-							} else {
-								counter++;										// update image counter so we know when the stream has ended and all the images are in
-								album.pictures.push(mongoReturnDocument._id);	// the album object and finally save the album and return album ID to front-end.
-								if (counter === filesLength) {
-									album.save((err, mongoReturnDocument) => {
-										if (!err) {
-											res.statusCode = 200;
-											res.json({ message: 'Album added!', albumId: mongoReturnDocument._id });	
-										}
-									});
-								}
-							}
+			        	saveFileToDatabase(image, res, (mongoFile) => {
+			        		if (album) {
+				        		counter++;
+				        		album.pictures.push(mongoFile.imageId);
+				        		if (counter === filesLength) {
+				        			saveAlbumToDatabase(album, res, (mongoAlbum) => {
+				        				res.json(mongoAlbum);
+				        			});
+				        		}
+				        	} else {
+				        		res.json(mongoFile);
+				        	}
 			        	});
 			        } else {
 			        	res.statusCode = 500;
@@ -105,3 +78,44 @@ module.exports = (app, express) => {
 
 	return imgRouter;
 };
+
+
+function saveAlbumToDatabase(album, res, cb) {
+	var response = {};
+	album.save((err, mongoReturnDocument) => {
+		if (!err) {
+			res.statusCode = 200;
+			response = { message: 'Album added!', albumId: mongoReturnDocument._id };
+		}
+		cb(response);
+	});
+}
+
+function saveFileToDatabase (image, res, cb) {
+	var response = {};
+	image.save((err, mongoReturnDocument) => {
+		if (err) {
+			if (err.code == 11000)
+				response = { success: false, message: 'Duplicate' };
+			else
+				response = { success: false, message: 'Saved to Amazon, but not to database', error: err };
+		} else {
+			res.statusCode = 200;
+			response = { message: 'Image added!', imageId: mongoReturnDocument._id };
+		}
+		cb(response);
+	})
+}
+
+function uploadS3 (readStream, key, callback) {
+  	var upload = s3Stream.upload({
+    	'Bucket': config.bucket,
+    	'Key': key
+  	});
+  	upload.on('error', err => callback(err));
+  	upload.on('part', details => console.log(inspect(details)));
+  	upload.on('uploaded', details => callback(null, details));
+
+  	// Pipe the Readable stream to the s3-upload-stream module.
+  	readStream.pipe(upload);
+}

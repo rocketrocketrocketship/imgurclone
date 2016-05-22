@@ -1,6 +1,6 @@
 angular.module('imageCtrl', [])
 
-.controller('uploadController', function($rootScope, $window, Auth) {
+.controller('uploadController', function($rootScope, $window, Auth) { // here it all begins
 	var vm = this;
 	vm.name = "awesome people";
 	vm.link = '';	
