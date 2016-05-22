@@ -5,7 +5,7 @@
 var express    = require('express');
 var app        = express();
 var bodyParser = require('body-parser');
-var morgan     = require('morgan'); 		// used to see requests
+var morgan     = require('morgan');
 var mongoose   = require('mongoose');
 var config 	   = require('./config');
 var path 	   = require('path');
@@ -30,12 +30,18 @@ app.use(function(req, res, next) {
 // log all requests to the console
 app.use(morgan('dev'));
 
-// connect to our database (hosted on modulus.io)
+// connect to our database (hosted on google cloud)
 mongoose.connect(config.database); 
 
 // set static files location
 // used for requests that our frontend will make
 app.use(express.static(__dirname + '/public'));
+
+
+// enable trust proxy. if true, the client’s IP address is understood as the left-most entry in 
+// the X-Forwarded-* header
+ 
+app.enable('trust proxy');
 
 // ROUTES FOR OUR API =================
 // ====================================

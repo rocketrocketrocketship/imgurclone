@@ -19,16 +19,18 @@ module.exports = (app, express) => {
 	imgRouter.post('/upload', (req, res) => {
 		var filesLength = JSON.parse(req.get('files-length')),					// get files length first and determine if we need an album or not
 			counter = 0,
-			album = (filesLength > 1) ? new Album() : undefined;
+			album = (filesLength > 1) ? new Album() : undefined,
+			sizeInBytes = 0;
 		var busboy = new Busboy({ headers: req.headers });						// Saves user images to AMAZON S3 servers
 	    if (req.busboy) {														// TODO: maybe make this logic to its own function because right now we're uploading and saving to database in this one function.													
-	        req.busboy.on('file', (fieldname, file, filename, encoding) => {	
+	        req.busboy.on('file', (fieldname, file, filename, encoding) => {
+	        	file.on('data', data => sizeInBytes = data.length);
 	        	uploadS3(file, filename, (err, data) => {
 			        if (!err) {
 			        	var image = new Image({
 			        		ip: null,
 			        		fileName: filename,
-			        		size: null,
+			        		size: sizeInBytes,
 			        		amazonLink: data.Location
 			        	});
 			        	saveFileToDatabase(image, res, (mongoFile) => {
