@@ -63,6 +63,33 @@ angular.module('imageCtrl', [])
 		albumId = $routeParams.albumId;
 	vm.name = 'My album';
 	vm.links = [];
+	vm.layout = 'small';
+	vm.changeLayout = function () {
+		if (vm.layout === 'small') {
+			vm.changeToBigLayout();
+		} else {
+			vm.changeToSmallLayout();
+		}
+	}
+	vm.changeToSmallLayout = function () {
+		var els = document.querySelectorAll('.img');
+		for (var i = 0; i < els.length; i++) {
+			var el = els[i];
+			el.style.width = '24%';
+			el.style.height = '30%';
+		}
+		vm.layout = 'small';
+	};
+	vm.changeToBigLayout = function () {
+		var els = document.querySelectorAll('.img');
+		for (var i = 0; i < els.length; i++) {
+			var el = els[i];
+			el.style.width = '49%';
+			el.style.height = '47%';
+		}
+		vm.layout = 'big';
+
+	};
 	$http.post('/img/album', {"albumId": albumId})
 		.success(function(data, status, headers, config) {
 	    	vm.links = data;
@@ -70,5 +97,5 @@ angular.module('imageCtrl', [])
 		error(function(data, status, headers, config) {
 	    	console.log('failure');
 		});
-});
 
+});
