@@ -1,6 +1,8 @@
-<h1>Upload succesful!</h1>
-<h3>{{album.name}}<i class="glyphicon glyphicon-th-large layoutbutton" ng-click="album.changeLayout()"></i></h3>
+<h3 class="ML40">{{images.name}}</h3>
 
-<span ng-repeat="link in album.links">
-	<span class="img" style="background-image:url({{link.amazonLink}});">	
-</span>
+<!-- <span ng-repeat="link in images.links">
+	<span class="img" style="background-image:url({{images.path(link)}});">
+</span> -->
+<div>
+	<img ng-repeat="link in images.links" class="img album" ng-src="{{images.path(link)}}"/>
+</div>

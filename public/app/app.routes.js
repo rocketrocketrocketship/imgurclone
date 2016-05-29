@@ -5,26 +5,15 @@ angular.module('app.routes', ['ngRoute'])
     $routeProvider
         .when('/', {
             templateUrl : 'app/views/pages/home.html',
-            controller: 'uploadController',
-            controllerAs: 'image'
+            controller: 'frontImageCtrl',
+            controllerAs: 'submission'
         })
-
-        .when('/show/:imageId', {
-            templateUrl: 'app/views/pages/image.html',
-            controller: 'singleImageController',
-            controllerAs: 'single'
-        })
-        .when('/showalbum/:albumId', {
+        .when('/show/:submissionId', {
             templateUrl: 'app/views/pages/album.html',
-            controller: 'albumController',
-            controllerAs: 'album'
+            controller: 'imageCtrl',
+            controllerAs: 'images'
         })
-        .when('/show', {
-            templateUrl: 'app/views/pages/image.html',
-            controller: 'singleImageController',
-            controllerAs: 'single'
-        })
-
+        
     $locationProvider.html5Mode(true);
 
 });

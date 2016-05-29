@@ -4,48 +4,57 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>User CRM</title>
-
+	<!-- jQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<!-- FOR ANGULAR ROUTING -->
 	<base href="/">
 
 	<!-- CSS  -->
 	<!-- load bootstrap from CDN and custom CSS -->
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/paper/bootstrap.min.css">
-	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+	<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/paper/bootstrap.min.css">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css"> -->
 	<link rel="stylesheet" href="assets/css/main.css">
 
 	<!-- JS -->
 	<!-- load angular and angular-route via CDN -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-animate.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-animate.js"></script>
 
 	<!-- controllers -->
 	<script src="app/controllers/mainCtrl.js"></script>
 	<script src="app/controllers/userCtrl.js"></script>
 	<script src="app/controllers/imageCtrl.js"></script>
+	<script src="app/controllers/uploadCtrl.js"></script>
+	<script src="app/controllers/headerController.js"></script>
+
+
+	<!-- components -->
+	<script src="app/components/uploadComp.js"></script>
+	<script src="app/components/headerComp.js"></script>
 
 	<!-- services -->
-	<script src="app/services/authService.js"></script>
+	<script src="app/services/uploadService.js"></script>
 	<script src="app/services/userService.js"></script>
+	<!-- Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
 
 	<!-- main Angular app files -->
 	<script src="app/app.routes.js"></script>
 	<script src="app/app.js"></script>
 </head>
 <body ng-app="userApp" ng-controller="uploadController as main">
-	<header>
-		<div class="navbar navbar-inverse">
-			<div class="container">
-				<div class="navbar-header">
-		          	<a class="navbar-brand" href="/">Imgur clone</a>
-		        </div>
-			</div>
-			<div class="progressbar"><div class="innerprogress"></div></div>
-		</div>
-	</header>
-	<main class="container">
-		<div class="viewcont" ng-view></div>
+	<div id="overlay"></div>
+	<div id="modal" class="modal">
+		<span class="closeButton" ng-click="main.closeModal()">x</span>
+		<h3>Upload a picture or an album</h3>
+		<upload-image class="uploader"></upload-image>
+	</div>
+	<app-header></app-header>
+	<div class="progressbar"><div class="innerprogress"></div></div>
+	<main class="contwrapper">
+		<div ng-view></div>
 	</main>
 </body>
 </html>

@@ -1,10 +1,6 @@
-<h1>Hello, {{image.name}}</h1>
-<p>Upload an image or an album. Choose yourself. </p>
-<form ref='uploadForm' id='uploadForm' action='img/upload' method='post' encType="multipart/form-data">
-	<label>
-		<input style="display:none;" type="file" name="sampleFile" id="uploadFile" multiple/>
-		<div class="btn btn-primary">Pick pic</div>
-	</label>
-	<button type="button" class="btn btn-default" ng-click="image.upload()" id="upload-button">Upload</button>
-</form>
-<script src="assets/js/uploader.js"></script>
+<img 
+	ng-repeat="(key, value) in submission.submissions" 
+	class="img"
+	ng-src="{{submission.thumbnailPath(value[0])}}"
+	ng-click="submission.open(key)"
+/>

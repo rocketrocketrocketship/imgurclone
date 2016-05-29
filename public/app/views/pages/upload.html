@@ -1,0 +1,7 @@
+<form ref='uploadForm' id='uploadForm' action='img/upload' method='post' encType="multipart/form-data">
+	<label>
+		<input style="display:none;" type="file" name="sampleFile" id="uploadFile" multiple/>
+		<div class="uploadButtonGray">Pick your image(s)</div>
+	</label>
+	<div type="button" class="uploadButtonGray" ng-click="image.upload(); image.closeModal();" id="upload-button">Upload</div>
+</form>

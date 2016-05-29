@@ -6,14 +6,16 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "ejs": "~1.0.0",
-    "express": "~4.9.8",
     "aws-sdk": "^2.3.11",
     "bcrypt-nodejs": "*",
     "body-parser": "^1.15.1",
+    "ejs": "~1.0.0",
+    "express": "~4.9.8",
     "express-busboy": "^2.5.0",
+    "formidable": "^1.0.17",
     "mongoose": "^4.4.17",
-    "s3-upload-stream": "^1.0.7",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "multiparty": "^4.1.2",
+    "s3-upload-stream": "^1.0.7"
   }
 }

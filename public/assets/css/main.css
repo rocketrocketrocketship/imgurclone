@@ -1,30 +1,167 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body, .container, .viewcont {
-	height: 100%;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+header {
+    width: 100%;
+    height: 60px;
+    padding-left: 140px;
+    background: #a5a5a5;
+    color: white; 
+}
+
+header a {
+    margin-top: 6px !important;
+    display: inline-block;
+    font-size: 34px;
+    color: white;
+    font-family: 'Amatic SC', cursive;
+}
+
+.modal h3 {
+    font-family: 'Amatic SC', cursive;
+    font-size: 35px;
+    font-weight: 400;
+    margin: 0;
+    margin-top: 20px;
+}
+
+.closeButton {
+    position: absolute;
+    right: 20px;
+    font-size: 21px;
+    top: 30px;
+    color: #565353;
+    cursor: pointer;
+    border: 1px solid #565353;
+    border-radius: 17px;
+    width: 33px;
+    text-align: center;
+    height: 30px;
+}
+
+.uploadButtonGray {
+    border: 2px solid gray;
+    padding: 4px 12px;
+    font-weight: 200;
+    cursor: pointer;
+    background: white;
+    color: #828282;
+    display: inline-block;
+}
+
+.uploadButtonWhite {
+    border: 2px solid white;
+    padding: 4px 12px;
+    font-weight: 200;
+    cursor: pointer;
+    background: #a5a5a5;
+    color: #ffffff;
+    display: inline-block;
+}
+
+.contwrapper {
+    height: 100%;
+    width: 80%;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+
+.contwrapper .album {
+    max-width: 720px;
+    width: auto;
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 10px;
+    float: none;
+}
+
+.uploader {
+    display: inline-block;
+    position: absolute;
+    margin-top: 12px;
+}
+
+.overlay {
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    background: #000000;
+    opacity: .4;
+    z-index: 100;
+}
+
+.modal {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    background: #ffffff;
+    margin: 0 auto;
+    left: 0;
+    display: block;
+    right: 0;
+    padding: 10px;
+    z-index: 200;
+    top: -100%;
+    -webkit-box-shadow: 10px 10px 16px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 16px -9px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 16px -9px rgba(0,0,0,0.75);
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.modalShow {
+    top: 20%;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 
 .img {
 	position: relative;
     float: left;
-    width: 24%;
-    height: 27%;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border: 4px solid #87C3F3;
+    width: 250px;
+    height: 200px;
+    border: 3px solid #c7c7c7;
     margin: 5px 0 0 5px;
-    -webkit-transition: all .6s;
-    transition: all .6s;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.uploadModal {
+    position: absolute;
+    top: 14px;
+    margin-left: 40px;
 }
 
 .progressbar {
-    height: 4px;
+    height: 2px;
     width: 100%;
-    background: #E85757;
-    display: none;
+    background: #f783b3;
 }
 
 .innerprogress {
-	height: 4px;
+	height: 2px;
+    width: 0%;
 	background: #133754;
 }
 
