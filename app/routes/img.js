@@ -27,11 +27,16 @@ module.exports = (app, express) => {
 			form.on('error', function(err) {
 				res.end('There was a problem parsing the file')
 			})
+
 			form.on('part', function(part) {
 
 				var image = new Image({
 	        		size: sizeInBytes
 	        	})
+
+	        	if (!part.filename) {
+			      	submission.title = part.name
+			    }
 
 				if (part.filename) {
 					saveFileToDatabase(image, res)
@@ -77,7 +82,10 @@ module.exports = (app, express) => {
 		var submissionId = req.body.submissionId;
 		Submission.findById(submissionId, (err, submission) => {
 			if (err) res.send(err)
-			res.json(submission.pictures)
+			res.json({
+				'pics': submission.pictures,
+				'title': submission.title
+			})
 		})
 	})
 

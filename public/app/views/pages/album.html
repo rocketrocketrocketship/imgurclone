@@ -1,8 +1,7 @@
-<h3 class="ML40">{{images.name}}</h3>
+<h3 class="title">{{images.title}}</h3>
 
-<!-- <span ng-repeat="link in images.links">
-	<span class="img" style="background-image:url({{images.path(link)}});">
-</span> -->
 <div>
 	<img ng-repeat="link in images.links" class="img album" ng-src="{{images.path(link)}}"/>
 </div>
+
+<comment-comp></comment-comp>

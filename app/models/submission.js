@@ -8,6 +8,7 @@ var bcrypt 		 = require('bcrypt-nodejs');
 var Submission = new Schema({
 	pictures: { type: [ObjectId], default: [] },
 	ip: Number,
+	title: String,
 	date: { type: Date, default: Date.now },
 	upvotes: Number,
 	downvotes: Number,

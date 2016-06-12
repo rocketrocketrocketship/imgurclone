@@ -1,6 +1,19 @@
-<img 
+<!-- <img 
 	ng-repeat="(key, value) in submission.submissions" 
 	class="img"
 	ng-src="{{submission.thumbnailPath(value[0])}}"
 	ng-click="submission.open(key)"
-/>
+/> -->
+<div class="imgWrap" ng-repeat="(key, value) in submission.submissions">
+	<div class="imgControlPanel">
+		<div class="imgControls"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></div>
+		<div class="imgControls"><i class="fa fa-arrow-circle-down" aria-hidden="true"></i></div>
+		<div class="imgControls">27</div>
+		<div class="imgControls"><i class="fa fa-comments-o" aria-hidden="true"></i></div>
+	</div>
+	<img 
+	class="img"
+	ng-src="{{submission.thumbnailPath(value[0])}}"
+	ng-click="submission.open(key)"
+	/>
+</div>

@@ -7,7 +7,7 @@ var bcrypt 		 = require('bcrypt-nodejs');
 
 var CommentSchema   = new Schema({
 	ip: Number,
-	title: String,
+	username: String,
 	body: String,
 	date: { type: Date, default: Date.now },
 	upvotes: Number,

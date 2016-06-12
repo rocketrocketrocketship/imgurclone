@@ -1,6 +1,6 @@
 angular.module('uploadCtrl', [])
 
-.controller('uploadController', function($rootScope, $window, uploadService) { // here it all begins
+.controller('uploadController', function($rootScope, $window, uploadService) {
 	var vm = this;
 	vm.closeModal = function () {
 		$('#overlay').removeClass('overlay');
@@ -8,10 +8,10 @@ angular.module('uploadCtrl', [])
 		$('body').css('position', 'static');
 	};
 	vm.upload = function () {
-		var form 		= $('#uploadForm'),
-			files  		= $('#uploadFile').prop("files"),
-			formData 	= new FormData();
-
+		var submissionTitle 	= $('#uploadForm')[0].elements['submissionTitle'].value,
+			files  				= $('#uploadFile').prop("files"),
+			formData 			= new FormData();
+		formData.append(submissionTitle, submissionTitle);
 		$.each(files, (i, file) => {
 			if (file.type.match('image.*')) {
 				formData.append('photos', file);

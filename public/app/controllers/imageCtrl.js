@@ -3,7 +3,7 @@ angular.module('imageCtrl', [])
 .controller('imageCtrl', function ($routeParams, $http) {
 	var vm = this,
 		submissionId = $routeParams.submissionId;
-	vm.name = 'My album';
+	vm.title = '';
 	vm.links = [];
 	vm.layoutIsSmall = true;
 	vm.path = function (id) { 
@@ -11,8 +11,8 @@ angular.module('imageCtrl', [])
 	};
 	$http.post('/img/submission', {"submissionId": submissionId})
 		.success((data, status, headers, config) => {
-	    	vm.links = data;
-	    	console.log(data);
+	    	vm.links = data.pics;
+	    	vm.title = data.title;
 		}).
 		error((data, status, headers, config) => {
 	    	console.log('failure');

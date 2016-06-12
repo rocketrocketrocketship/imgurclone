@@ -1,0 +1,17 @@
+<div class="commentSection">
+    <span class="title" style="text-decoration: underline; font-size: 34px;">Comment section
+        <i class="fa fa-comments PL10"></i>
+    </span>
+    <form ng-show="comment.commentForm" id="commentForm">
+        <input placeholder="Nickname" name="user" class="submissionTitle" type="text">
+        <textarea placeholder="Say something..." name="userContent" class="submissionTitle" style="display: block; width: 400px; height: 100px;">
+        </textarea>
+    </form>
+    <span class="commentBtn" ng-click="comment.collectComments(); comment.commentForm=true;">Leave a comment...</span>
+    <ul>
+        <li ng-repeat="submission in comment.comments" class="submission">
+            <span class="username">{{submission.username}} {{ submission.date | date }}</span>
+            <span class="content">{{submission.body}}</span>
+        </li>
+    </ul>
+</div>

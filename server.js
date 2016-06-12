@@ -48,7 +48,10 @@ app.enable('trust proxy');
 
 // API ROUTES ------------------------
 var imgRoutes = require('./app/routes/img')(app, express);
+var cmntRoutes = require('./app/routes/cmnt')(app, express);
+
 app.use('/img', imgRoutes);
+app.use('/cmnt', cmntRoutes);
 
 // MAIN CATCHALL ROUTE --------------- 
 // SEND USERS TO FRONTEND ------------
